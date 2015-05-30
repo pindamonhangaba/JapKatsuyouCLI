@@ -1,5 +1,3 @@
-#include <QCoreApplication>
-#include <QDebug>
 #include "japkat.h"
 
 int main(int argc, char *argv[])

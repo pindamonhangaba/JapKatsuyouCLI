@@ -19,6 +19,7 @@ void JapKat::doConj(QString verb)
     if (type < 1){
         result = "{\"error\":\"not a verb/no conjugation\"}";
     }
+    edict2.desconnect();
 
     QString complex = complexConjugation(verb, type);
     QString basic = basicConjugation(verb, type);

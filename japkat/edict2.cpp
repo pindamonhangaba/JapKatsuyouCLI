@@ -51,7 +51,7 @@ Edict2::Edict2()
  */
 Edict2::~Edict2()
 {
-
+    desconnect();
 }
 
 
@@ -88,6 +88,8 @@ void Edict2::desconnect()
 {
     if (QSqlDatabase::contains("dbverbs"))
     {
+        // suppress "database in use" warning
+        verbdb = QSqlDatabase();
         QSqlDatabase::removeDatabase("dbverbs");
     }
 }

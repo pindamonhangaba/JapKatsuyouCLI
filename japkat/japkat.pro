@@ -4,11 +4,12 @@ QT       -= gui
 TARGET = JapKatsuyouCLI
 CONFIG   += console
 CONFIG   -= app_bundle
+CONFIG   += static
 
 TEMPLATE = app
 DESTDIR = ../japkat-bin
 
-DEFINES += dataFolder=\\\"./\\\" #E:\E\Projects\Qt\JapKatsuyouCLI\japkat\verbs
+DEFINES += dataFolder=\\\"./\\\"
 
 SOURCES += \
             main.cpp \
@@ -20,7 +21,7 @@ HEADERS += \
             edict2.h \
             japkat.h
 
-LIBS += -L../libjpconj-bin/ -llibjpconj
+LIBS += -L../libjpconj-bin/ -ljpconj
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../libjpconj-bin/ -llibjpconj
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../libjpconj-bin/debug/ -llibjpconj
 #else:symbian: LIBS += -llibjpconj

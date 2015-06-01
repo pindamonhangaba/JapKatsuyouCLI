@@ -6,6 +6,9 @@ CONFIG   += console
 CONFIG   -= app_bundle
 CONFIG   += static
 
+QTPLUGIN += sql
+QTPLUGIN.platforms = qminimal
+
 TEMPLATE = app
 DESTDIR = ../japkat-bin
 

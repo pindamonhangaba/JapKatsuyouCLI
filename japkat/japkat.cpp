@@ -41,7 +41,7 @@ QString JapKat::basicConjugation(QString verb, EdictType type)
     QMap<KForm, QString> basicForms = Msg::basicFormsMap();
     QString result = "[";
     foreach (KForm form, basicForms.keys()){
-        result += "{\""+getKForm(form)+"\":\"";
+        result += "{\"KForm\":\""+getKForm(form)+"\",\"Conjugated\":\"";
         result += JpConj::Katsuyou(verb, type, form);
         result += "\"},";
     }
@@ -58,16 +58,21 @@ QString JapKat::basicConjugation(QString verb, EdictType type)
 QString JapKat::complexConjugation(QString verb, EdictType type)
 {
     QMap<CForm, QString> complexForms = Msg::complexFormsMap();
+    QMap<Polarity, QString> polarity;
+    polarity.insert(_Negative,"Negative");
+    polarity.append(_Affirmative,"Affirmative");
+    QMap<Politeness, QString> politeness;
+    politeness.insert(_Plain,"Plain");
+    politeness.insert(_Polite,"Polite");
+
     QString result = "[";
     foreach (CForm form, complexForms.keys()){
-        result += "{\""+getCForm(form)+"\":{";
-        result += "\"Polite\":{\"Affirmative\":\"";
-        result += JpConj::Conjugate(verb, type, form, _Polite, _Affirmative)+"\",\"Negative\":\"";
-        result += JpConj::Conjugate(verb, type, form, _Polite, _Negative)+"\"";
-        result += "},\"Plain\":{\"Affirmative\":\"";
-        result += JpConj::Conjugate(verb, type, form, _Plain, _Affirmative)+"\",\"Negative\":\"";
-        result += JpConj::Conjugate(verb, type, form, _Plain, _Negative)+"\"";
-        result += "}}},";
+        foreach (Polarity p, polarity) {
+            foreach (Politeness po, politeness) {
+                result += "{\"CForm\":\""+getCForm(form)+"\",\"Politeness\":\""+politeness.value(po)+"\",\"Polarity\":\""+polarity.value(p)+"\",";
+                result += "\"Conjugated\":\""+JpConj::Conjugate(verb, type, form, po, p).replace("|","")+"\"},";
+            }
+        }
     }
     result.chop(1);
     result += "]";
@@ -99,16 +104,19 @@ QString JapKat::getCForm(enum CForm cform)
         return "Volitional";
         break;
     case _PresentContinuous:
-        return "PresentContinuous";
+        return "Present Continuous";
         break;
     case _PastContinuous:
-        return "PastContinuous";
+        return "Past Continuous";
+        break;
+    case _Passive:
+        return "Passive";
         break;
     case _Causative:
         return "Causative";
         break;
     case _CausativePassive:
-        return "CausativePassive";
+        return "Causative Passive";
         break;
     case _Potential:
         return "Potential";

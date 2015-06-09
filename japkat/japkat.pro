@@ -1,4 +1,4 @@
-QT       += core sql
+QT       += sql
 QT       -= gui
 
 TARGET = JapKatsuyouCLI
@@ -6,8 +6,8 @@ CONFIG   += console
 CONFIG   -= app_bundle
 CONFIG   += static
 
-QTPLUGIN += sql
-QTPLUGIN.platforms = qminimal
+#QTPLUGIN += qsqlite
+#QTPLUGIN.platforms = qminimal
 
 TEMPLATE = app
 DESTDIR = ../japkat-bin

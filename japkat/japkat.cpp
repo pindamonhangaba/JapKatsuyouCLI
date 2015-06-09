@@ -42,7 +42,7 @@ QString JapKat::basicConjugation(QString verb, EdictType type)
     QString result = "[";
     foreach (KForm form, basicForms.keys()){
         result += "{\"KForm\":\""+getKForm(form)+"\",\"Conjugated\":\"";
-        result += JpConj::Katsuyou(verb, type, form);
+        result += JpConj::Katsuyou(verb, type, form).replace("|","");
         result += "\"},";
     }
     result.chop(1);
@@ -60,15 +60,15 @@ QString JapKat::complexConjugation(QString verb, EdictType type)
     QMap<CForm, QString> complexForms = Msg::complexFormsMap();
     QMap<Polarity, QString> polarity;
     polarity.insert(_Negative,"Negative");
-    polarity.append(_Affirmative,"Affirmative");
+    polarity.insert(_Affirmative,"Affirmative");
     QMap<Politeness, QString> politeness;
     politeness.insert(_Plain,"Plain");
     politeness.insert(_Polite,"Polite");
 
     QString result = "[";
     foreach (CForm form, complexForms.keys()){
-        foreach (Polarity p, polarity) {
-            foreach (Politeness po, politeness) {
+        foreach (Polarity p, polarity.keys()) {
+            foreach (Politeness po, politeness.keys()) {
                 result += "{\"CForm\":\""+getCForm(form)+"\",\"Politeness\":\""+politeness.value(po)+"\",\"Polarity\":\""+polarity.value(p)+"\",";
                 result += "\"Conjugated\":\""+JpConj::Conjugate(verb, type, form, po, p).replace("|","")+"\"},";
             }

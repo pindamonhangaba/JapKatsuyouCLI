@@ -17,6 +17,7 @@ public:
     QString complexConjugation(QString verb, EdictType type);
     QString getCForm(CForm cform);
     QString getKForm(KForm kform, bool desc = false);
+    QString dataFolder;
 
 signals:
 

@@ -12,7 +12,7 @@ JapKat::JapKat(QObject *parent) :
 
 void JapKat::doConj(QString verb)
 {
-    Edict2 edict2;
+    Edict2 edict2(dataFolder);
 
     EdictType type = edict2.find(verb);
     QString result = "";
@@ -64,7 +64,6 @@ QString JapKat::complexConjugation(QString verb, EdictType type)
     QMap<Politeness, QString> politeness;
     politeness.insert(_Plain,"Plain");
     politeness.insert(_Polite,"Polite");
-
     QString result = "[";
     foreach (CForm form, complexForms.keys()){
         foreach (Polarity p, polarity.keys()) {

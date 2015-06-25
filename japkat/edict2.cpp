@@ -39,8 +39,9 @@
 /*!
  * \brief Edict2::Edict2 Constructor of the Edict2 management module
  */
-Edict2::Edict2()
+Edict2::Edict2(QString path)
 {
+    dataFolder = path;
     connect();
 }
 
@@ -69,7 +70,7 @@ void Edict2::connect()
     if (!QSqlDatabase::contains("dbverbs"))
     {
         verbdb =  QSqlDatabase::addDatabase("QSQLITE","dbverbs");
-        verbdb.setDatabaseName(QString(dataFolder) + "verbs/edict2verbs.db" );
+        verbdb.setDatabaseName(dataFolder + "verbs/edict2verbs.db" );
     }
     else
     {

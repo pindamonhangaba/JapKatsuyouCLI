@@ -12,8 +12,6 @@ CONFIG   += static
 TEMPLATE = app
 DESTDIR = ../japkat-bin
 
-DEFINES += dataFolder=\\\"./\\\"
-
 SOURCES += \
             main.cpp \
             edict2.cpp \

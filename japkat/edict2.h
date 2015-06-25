@@ -35,7 +35,7 @@ class Edict2
 {
 
 public:
-    Edict2();
+    Edict2(QString path);
     ~Edict2();
     EdictType find(QString verb);
     void connect();
@@ -43,6 +43,7 @@ public:
 
 private:
     QSqlDatabase verbdb;
+    QString dataFolder;
 
 };
 
